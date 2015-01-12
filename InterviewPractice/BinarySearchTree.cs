@@ -95,6 +95,33 @@ namespace InterviewPractice
             return result;
         }
 
+        public bool Contains(T value)
+        {
+            if (Root == null)
+            {
+                return false;
+            }
+
+            var iter = Root;
+            while (true)
+            {
+                var compareResult = iter.Value.CompareTo(value);
+                if (compareResult == 0)
+                {
+                    return true;
+                }
+
+                var edgeIndex = compareResult > 0 ? 0 : 1;
+
+                if (iter.Edges[edgeIndex] == null)
+                {
+                    return false;
+                }
+
+                iter = iter.Edges[edgeIndex];
+            }
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             if (Root == null)

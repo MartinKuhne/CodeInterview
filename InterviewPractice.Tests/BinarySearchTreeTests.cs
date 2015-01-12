@@ -15,6 +15,16 @@ namespace InterviewPractice.Tests
         }
 
         [TestMethod]
+        public void WhenICreateASimpleTreeItContainsAllValues()
+        {
+            var t = new BinarySearchTree<int> { 1, 2, 3 };
+            Assert.IsTrue(t.Contains(1));
+            Assert.IsTrue(t.Contains(2));
+            Assert.IsTrue(t.Contains(3));
+            Assert.IsFalse(t.Contains(4));
+        }
+
+        [TestMethod]
         public void WhenICreateASimpleTreeItEnumeratesInTheCorrectOrder()
         {
             var t = new BinarySearchTree<int> { 1, 2, 3 };
