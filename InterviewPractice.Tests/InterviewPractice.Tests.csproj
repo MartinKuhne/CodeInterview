@@ -54,6 +54,7 @@
     <Compile Include="PermutationsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FactorialTests.cs" />
+    <Compile Include="LaterallyLinkedTreeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InterviewPractice\InterviewPractice.csproj">
