@@ -28,7 +28,7 @@ namespace InterviewPractice
         }
 
         /// <summary>
-        /// This solution is relatively easy to write, but 
+        /// This solution is relatively easy to write, but requires around log n (depth of tree) storage
         /// </summary>
         /// <param name="Root"></param>
         public static void Linkify(Node<T> Root)
