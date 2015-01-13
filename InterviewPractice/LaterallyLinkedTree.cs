@@ -8,34 +8,32 @@ namespace InterviewPractice
     /// In the laterally linked tree, each node has a link to it's neighbor at the same tree depth
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class LaterallyLinkedTree<T> : IEnumerable<T> where T : IComparable<T>
+    public class LaterallyLinkedNode<T> where T: IComparable<T>
     {
-        public class Node<T> where T: IComparable<T>
-        {
-            public T Value { get; set; }
-            public List<Node<T>> Edges;
+        public T Value { get; set; }
+        public List<LaterallyLinkedNode<T>> Edges;
             
-            // The distinguishing factor of this class is the lateral pointer
-            // (pointer to the next node at the same level)
-            public Node<T> Right;
+        // The distinguishing factor of this class is the lateral pointer
+        // (pointer to the next node at the same level)
+        public LaterallyLinkedNode<T> Right;
 
-            public Node(T value)
-            {
-                this.Value = value;
-                this.Edges = new List<Node<T>>();
-                this.Right = null;
-            }
+        public LaterallyLinkedNode(T value)
+        {
+            this.Value = value;
+            this.Edges = new List<LaterallyLinkedNode<T>>();
+            this.Right = null;
         }
 
         /// <summary>
         /// This solution is relatively easy to write, but requires around log n (depth of tree) storage
+        /// Improvement: This approach does not make use of the Right pointers previously generated.
         /// </summary>
-        /// <param name="Root"></param>
-        public static void Linkify(Node<T> Root)
+        /// <param name="root"></param>
+        public static void Linkify(LaterallyLinkedNode<T> root)
         {
-            var neighbors = new Dictionary<int, Node<T>>();
-            var toVisit = new Queue<KeyValuePair<int, Node<T>>>();
-            toVisit.Enqueue(new KeyValuePair<int, Node<T>>(1, Root));
+            var neighbors = new Dictionary<int, LaterallyLinkedNode<T>>();
+            var toVisit = new Queue<KeyValuePair<int, LaterallyLinkedNode<T>>>();
+            toVisit.Enqueue(new KeyValuePair<int, LaterallyLinkedNode<T>>(1, root));
             while (toVisit.Any())
             {
                 var current = toVisit.Dequeue();
@@ -52,19 +50,9 @@ namespace InterviewPractice
 
                 foreach (var edge in node.Edges)
                 {
-                    toVisit.Enqueue(new KeyValuePair<int, Node<T>>(level + 1, edge));
+                    toVisit.Enqueue(new KeyValuePair<int, LaterallyLinkedNode<T>>(level + 1, edge));
                 }
             }
-        }
-         
-        public IEnumerator<T> GetEnumerator()
-        {
- 	        throw new NotImplementedException();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
- 	        throw new NotImplementedException();
         }
     }
 }
