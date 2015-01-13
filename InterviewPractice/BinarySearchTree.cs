@@ -65,7 +65,7 @@ namespace InterviewPractice
                 }
 
                 // special case left side and we are smaller than the current, but
-                // larger than the child. Here, we need on insert ourselves in between
+                // larger than the child. Here, we need on insert ourselves in-between
                 if (edgeIndex == 0 && iter.Edges[0].Value.CompareTo(value) < 0)
                 {
                     var newNode = new Node<T>(value);
