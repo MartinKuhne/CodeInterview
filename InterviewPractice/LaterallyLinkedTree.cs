@@ -54,5 +54,17 @@ namespace InterviewPractice
                 }
             }
         }
+
+        /// <summary>
+        /// Solution in constant storage
+        /// </summary>
+        /// <param name="root"></param>
+        /// <seealso cref="http://leetcode.com/2010/03/first-on-site-technical-interview.html"/>
+        public static void LinkifyConstantStorage(LaterallyLinkedNode<T> root)
+        {
+            // I was able to find an O(1) storage solution online, but it involved recursion
+            // I didn't dig any further. I think my blocker in understanding the question was 
+            // that I didn't consider a recursive function to have constant storage
+        }
     }
 }
