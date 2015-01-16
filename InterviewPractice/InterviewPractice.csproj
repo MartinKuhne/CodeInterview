@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="BinarySearchTree.cs" />
     <Compile Include="Factorial.cs" />
+    <Compile Include="Graph.cs" />
     <Compile Include="LaterallyLinkedTree.cs" />
+    <Compile Include="Palindrome.cs" />
     <Compile Include="Permutations.cs" />
     <Compile Include="Permutations2.cs" />
     <Compile Include="Program.cs" />
