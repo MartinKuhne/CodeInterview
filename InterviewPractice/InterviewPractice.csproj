@@ -50,6 +50,7 @@
     <Compile Include="Permutations2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReverseWords.cs" />
     <Compile Include="Silhouette.cs" />
   </ItemGroup>
   <ItemGroup>
