@@ -7,10 +7,14 @@ namespace InterviewPractice
     /// <summary>
     /// Reverse words in a string given the string is a character array
     /// </summary>
-    /// <remarks>Character arrays aren't very popular in C# so this takes a string
-    /// and converts to char array to satisfy the purpose of the interview question</remarks>
     public static class ReverseWordsHelper
     {
+        /// <summary>
+        /// Quickest approach - basically a one-liner. Be careful to explain how this 
+        /// works to the interviewer if they are not familiar with C#, and likely
+        /// you will be asked to proceed to solution 2 bellow without all the fancy
+        /// LINQ stuff
+        /// </summary>
         public static string ReverseWordsModern(this string s)
         {
             if (string.IsNullOrWhiteSpace(s) || s.Length == 1)
@@ -23,6 +27,12 @@ namespace InterviewPractice
             return result;
         }
 
+        /// <summary>
+        /// This is the "classic" version (using less runtime function)
+        /// </summary>
+        /// <remarks>Character arrays aren't very popular in C# so this still takes a string
+        /// then converts to char array to satisfy the purpose of the interview question
+        /// Does not handle double spaces</remarks>
         public static string ReverseWords(this string s)
         {
             if (string.IsNullOrWhiteSpace(s) || s.Length == 1)
