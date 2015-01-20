@@ -1,8 +1,4 @@
-﻿using System.CodeDom;
-using System.Collections;
-using System.Security.Policy;
-
-namespace InterviewPractice
+﻿namespace InterviewPractice
 {
     /// <summary>
     /// A palindrome is a sequence of characters which reads the same backward or forward
