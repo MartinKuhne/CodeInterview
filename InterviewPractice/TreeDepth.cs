@@ -22,6 +22,7 @@ namespace InterviewPractice
                 levels--;
                 result.Add(iter);
             }
+            return result;
         }
 
         public void AboveBelowHelper(List<TreeDepth> output, TreeDepth root, TreeDepth target, int desiredLevels, int levelsRemaining)
