@@ -58,6 +58,7 @@
     <Compile Include="LaterallyLinkedTreeTests.cs" />
     <Compile Include="ReverseWordTests.cs" />
     <Compile Include="IsSinglyLinkedListPalindromeTests.cs" />
+    <Compile Include="BestPlanTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InterviewPractice\InterviewPractice.csproj">

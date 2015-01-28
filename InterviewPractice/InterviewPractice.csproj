@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BestPlan.cs" />
     <Compile Include="BinarySearchTree.cs" />
     <Compile Include="Factorial.cs" />
     <Compile Include="Graph.cs" />
