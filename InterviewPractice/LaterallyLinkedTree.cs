@@ -56,6 +56,8 @@ namespace InterviewPractice
 
         /// <summary>
         /// Solution in constant storage
+        /// Requires a complete k-nary tree. A k-nary tree is a tree in which every level, except possibly the last, 
+        /// is completely filled, and all nodes are as far left as possible.
         /// </summary>
         /// <remarks>
         /// Let's call this "a recursive approach with constant storage". In reality the recursion itself takes up stack space.
@@ -70,6 +72,9 @@ namespace InterviewPractice
                 root.Children[iter].Right = root.Children[iter + 1];
             }
 
+            // this works because we always set the parent neighbor pointer one level 
+            // above the recurson, so the nrighbor to the rightmost child node always is the 
+            // peer's leftmost child.
             var neighbor = root.Right;
             if (neighbor != null && neighbor.Children.Any())
             {
