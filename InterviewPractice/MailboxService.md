@@ -21,48 +21,96 @@ The referrer itself is a service that needs to support CRUD for key/value pairs 
 Lookups are much more frequent than updates. The per-user data is of limited size, so an in-memory hash table would be convenient. 
 If the data does not fit in memory, have a two-stage lookup where the first stage redirects all users starting with 'a' to a certain server, or use another hash for that.
 
-I will specifiy additional requirements after answering Question 2
+The referrer serves two kinds of queries (redirect user to mailbox and redirect MTA to mailbox). Some approaches require these two requests to go to different hosts.
 
 ## Question 2
 
 Design goals (some paraphrased from question)
 - As an administrator, I can move mailboxes between machines with no service interruption
 - As a customer, the contents of my mailbox are always available
-- As a customer, mail delivery is instant 99% of the time and can take up to a minute 1% of the time 
+- As a customer, mail delivery is instant 99% of the time and can take up to a minute 1% of the time
 
 Now we can test different solutions against the requirements
 
-First off, there's a solution in Windows Hyper-V called live migration where you can literally move a running VM to a different machine. It requires a SAN obviously. You can build a SAN out of commodity hardware (like backblaze). Even if you don't have live migration, the mailbox state must live on disk, so if you have a SAN, storage can fail over really quickly and the agent can restart. For the purpose of this design, I am going to assume everything lives on the commodity machine and we don't have a SAN
+### Off-the-shelf options
 
-We don't have SQL and we don't need all of ACID. The problem we have to solve though is that of forward progress, in other words once a new e-mail has arrived, if we revert to a previous state, the user will experience data loss. The same will apply to message deletion or locally created messages.
+#### Live migration
+Windows Hyper-V has the capability of live migration where one can literally move a running VM to a different machine. 
+I think it requires a SAN so no storage is being physically moved.
 
-I will assume there is a persistent indexed storage which I will call mailbox and a user agent controlling the mailbox which I will call user agent. Furthermore there is a mapping from user to the machine the mailbox and user agent runs on which I will call mapping.
+Analysis: A SAN cen be made out of commodity hardware (like backblaze). However, running each user agent in its own VM will be prohibitively resource intensive. One could develop a design where a user agent is first migrated to its own VM, then switches hosts.
 
-### Option 1
-If we introduce a mailbox read-only state, we can go through a series of state changes to preserve forward progress:
-- redirect incoming messages to a queue
-- switch mailbox to read-only
-- migrate mailbox to new machine
-- update the mapping
-- stop the old user agent (force client to reconnect)
-- restart message delivery to new agent
-- delete the old mailbox
+#### Distributed file systems
+In a distributed file system, data is split into chunks and the chunks can live on multiple machines. This allows rebalaning on the block storage level, but writes can be are complex. This is probably exceeding the scope of an interview question :)
 
-This solution is fairly straightforward to implement. It meets the design goal of migration with no data loss. However, message deletes will be unavailable while the mailbox is read-only and the duration of the read-only state will increase linearly with the size of the mailbox.
+### Analysis
 
-### Option 2 (reconcile)
-- snapshot and migrate mailbox to new machine (new messages arrive in old mailbox)
-- update the mapping (new messages arrive in new mailbox)
-- stop the old user agent (force client to reconnect)
-- restart message delivery to new agent
-- reconcile
+The core problem to solve is how to maintain consistency and prevent data loss during the transition to a new host. 
+I will assume there is a persisted storage componentwhich I will call mailbox and a user agent controlling the mailbox which I will call user agent. 
+Furthermore there is a mapping from user to the machine the mailbox and user agent runs on which I will call mapping.
 
-This approach has us maintain the mailbox state in two locations. We would rely on strong message identity (e.g. SMTP message id) to make the mailbox "eventually consistent".
+I'll assume the user agent can be restarted at will (all the stata will be in the mailbox) and the client has a retry and reconnect logic.
 
-### Option 3 (copy-on-write)
-This is a variant of #2 where we snapshot the mailbox, then keep a record of any changes that happen after the snapshot. This can be done with VSS in Windows and BTRFS snaphots on linux. This makes the reconcile operation fairly foolproof.
+State changes to the mailbox can occur both from the MTA (i.e. new incoming message) and the client (new outgoing message, message deletion). 
 
-### Option 4 (null hypothesis)
+### Option 1 (null hypothesis)
 Do nothing - mailbox down during migration
 
 The reason this will be a solution considered is that's it's zero cost and known risk. Sometimes that's the best option. 
+
+### Option 2 - Optimisitc execution
+- Clear the dirty bit on the source
+- Start migrating mailbox from source to target
+- Any updates to the source, set the dirty bit
+- If the migration finishes and the dirty bit is not set, success
+- If the dirty bit is set, retry
+
+This is a low cost solution that can work well when run at night hours or in a maintenance window. 
+However, as it is not deterministic, it would need to be combined with at least one other approach to fall back to (which may be #1)
+
+### Option 2 (reconcile)
+
+- migrate mailbox to to target while source remains online (new messages arrive in source)
+- update the mapping (new messages arrive in new mailbox)
+- stop the old user agent (force client to reconnect)
+- reconcile by comparing all objects in target to all objects in source
+
+This approach has us temporarily maintain the mailbox state in two locations. 
+We would rely on strong message identity (e.g. SMTP message id) to make the mailbox "eventually consistent" with no data loss.
+
+The reconcile step will be time and resource intensive. The user may temporarily see an older mailbox state while the reconcile is in progress.
+
+### Option 3 (replay)
+
+- start a log of all operations changing the mailbox state
+- migrate mailbox to to target while source remains online (new messages arrive in source)
+- update the mapping (new messages arrive in new mailbox)
+- stop the old user agent (force client to reconnect)
+- reconcile by replaying the operations onto the target
+
+This approach is a faster variant of the previous. The reconcile step will be less time and resource intensive. 
+The user may briefly see an older mailbox state while the reconcile is in progress.
+
+### Option 3 (dual storage user agent)
+
+This approach requires the user agent to access two mailboxes simultaneously while providing a unified view to the client.
+Using this capability, we can create an empty mailbox at the target and move content in small batches, keeping user lockout 
+at a minimum. Variants of this approach would be for the user agent to buffer new messages in memory, or create an additional mailbox
+at another location for new messages exclusively
+
+### Option 4 (copy-on-write)
+
+This option pushes the problem of snapshot and delta management to the file or block level. 
+A snapshot is a consistent read-only copy of a data set that allows repeatable reads. This allows mailbox migration over time.
+While the migration is going on, any changes are written to another storage location. That technique is called copy-on-write (COW).
+COW is available in software with VSS in Windows and BTRFS snaphots on linux.
+
+Option 5 (domain specific)
+
+Depending on the protocol used, we may be able to remporarily reject incoming new messages while asking the sender to retry.
+
+# Conclusion
+
+I think we don't quite have enough information to pick a best solution. The next step would be to explore the feasability and maturity of the approaches discussed,
+as well as an assessment of the user expectations towards consistency. For example, if the user was OK with a previously deleted message briefly reappearing,
+we can in turn tune for more performance or lower cost.
