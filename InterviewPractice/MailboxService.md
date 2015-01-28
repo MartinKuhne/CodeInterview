@@ -58,7 +58,7 @@ Do nothing - mailbox down during migration
 
 The reason this will be a solution considered is that's it's zero cost and known risk. Sometimes that's the best option. 
 
-### Option 2 - Optimisitc execution
+### Option 2 (Optimisitc execution)
 - Clear the dirty bit on the source
 - Start migrating mailbox from source to target
 - Any updates to the source, set the dirty bit
@@ -105,7 +105,7 @@ A snapshot is a consistent read-only copy of a data set that allows repeatable r
 While the migration is going on, any changes are written to another storage location. That technique is called copy-on-write (COW).
 COW is available in software with VSS in Windows and BTRFS snaphots on linux.
 
-Option 5 (domain specific)
+### Option 5 (domain specific)
 
 Depending on the protocol used, we may be able to remporarily reject incoming new messages while asking the sender to retry.
 
