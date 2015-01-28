@@ -17,7 +17,7 @@ What would be the procedure for moving one mailbox from one server to another se
 
 ## Question 1
 
-The referrer itself is a service that needs to support CRUD for key/value pairs of UserName,Host. The moving parts are a REST API and serialization to disk to persist the data.
+The referrer itself is a service that needs to support CRUD for key/value pairs of `UserName,Host`. The moving parts are a REST API and serialization to disk to persist the data.
 Lookups are much more frequent than updates. The per-user data is of limited size, so an in-memory hash table would be convenient. 
 If the data does not fit in memory, have a two-stage lookup where the first stage redirects all users starting with 'a' to a certain server, or use another hash for that.
 
@@ -26,9 +26,9 @@ I will specifiy additional requirements after answering Question 2
 ## Question 2
 
 Design goals (some paraphrased from question)
-1. As an administrator, I can move mailboxes between machines with no service interruption
-2. As a customer, the contents of my mailbox are always available
-3. As a customer, mail delivery is instant 99% of the time and can take up to a minute 1% of the time 
+- As an administrator, I can move mailboxes between machines with no service interruption
+- As a customer, the contents of my mailbox are always available
+- As a customer, mail delivery is instant 99% of the time and can take up to a minute 1% of the time 
 
 Now we can test different solutions against the requirements
 
@@ -51,11 +51,11 @@ If we introduce a mailbox read-only state, we can go through a series of state c
 This solution is fairly straightforward to implement. It meets the design goal of migration with no data loss. However, message deletes will be unavailable while the mailbox is read-only and the duration of the read-only state will increase linearly with the size of the mailbox.
 
 ### Option 2 (reconcile)
-# snapshot and migrate mailbox to new machine (new messages arrive in old mailbox)
-# update the mapping (new messages arrive in new mailbox)
-# stop the old user agent (force client to reconnect)
-# restart message delivery to new agent
-# reconcile
+- snapshot and migrate mailbox to new machine (new messages arrive in old mailbox)
+- update the mapping (new messages arrive in new mailbox)
+- stop the old user agent (force client to reconnect)
+- restart message delivery to new agent
+- reconcile
 
 This approach has us maintain the mailbox state in two locations. We would rely on strong message identity (e.g. SMTP message id) to make the mailbox "eventually consistent".
 
