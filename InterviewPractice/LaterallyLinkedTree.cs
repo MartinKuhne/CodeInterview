@@ -5,13 +5,13 @@ using System.Linq;
 namespace InterviewPractice
 {
     /// <summary>
-    /// In the laterally linked tree, each node has a link to it's neighbor at the same tree depth
+    /// In the laterally linked k-nary, each node has a link to it's neighbor at the same tree depth
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class LaterallyLinkedNode<T> where T: IComparable<T>
     {
         public T Value { get; set; }
-        public List<LaterallyLinkedNode<T>> Edges;
+        public List<LaterallyLinkedNode<T>> Children;
             
         // The distinguishing factor of this class is the lateral pointer
         // (pointer to the next node at the same level)
@@ -20,13 +20,12 @@ namespace InterviewPractice
         public LaterallyLinkedNode(T value)
         {
             this.Value = value;
-            this.Edges = new List<LaterallyLinkedNode<T>>();
+            this.Children = new List<LaterallyLinkedNode<T>>();
             this.Right = null;
         }
 
         /// <summary>
         /// This solution is relatively easy to write, but requires around log n (depth of tree) storage
-        /// Improvement: This approach does not make use of the Right pointers previously generated.
         /// </summary>
         /// <param name="root"></param>
         public static void Linkify(LaterallyLinkedNode<T> root)
@@ -48,7 +47,7 @@ namespace InterviewPractice
                 }
                 neighbors.Add(level, node);
 
-                foreach (var edge in node.Edges)
+                foreach (var edge in node.Children)
                 {
                     toVisit.Enqueue(new KeyValuePair<int, LaterallyLinkedNode<T>>(level + 1, edge));
                 }
@@ -58,13 +57,30 @@ namespace InterviewPractice
         /// <summary>
         /// Solution in constant storage
         /// </summary>
+        /// <remarks>
+        /// Let's call this "a recursive approach with constant storage". In reality the recursion itself takes up stack space.
+        /// </remarks>
         /// <param name="root"></param>
         /// <seealso cref="http://leetcode.com/2010/03/first-on-site-technical-interview.html"/>
         public static void LinkifyConstantStorage(LaterallyLinkedNode<T> root)
         {
-            // I was able to find an O(1) storage solution online, but it involved recursion
-            // I didn't dig any further. I think my blocker in understanding the question was 
-            // that I didn't consider a recursive function to have constant storage
+            // linkify my own children
+            for (var iter = 0; iter < root.Children.Count - 1; iter++)
+            {
+                root.Children[iter].Right = root.Children[iter + 1];
+            }
+
+            var neighbor = root.Right;
+            if (neighbor != null && neighbor.Children.Any())
+            {
+                root.Children.Last().Right = neighbor.Children.First();
+            }
+
+            // call down into the next level
+            foreach (var child in root.Children)
+            {
+                LinkifyConstantStorage(child);
+            }
         }
     }
 }
