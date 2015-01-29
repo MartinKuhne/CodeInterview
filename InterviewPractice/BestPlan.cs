@@ -24,15 +24,15 @@ namespace InterviewPractice
             public Feature[] Features { get; set; }
         }
 
-        public void Add(Plan plan)
-        {
-            allPlans.Add(plan);
-        }
-
         // this is the list of plans available instantiated as per the above
         private List<Plan> allPlans = new List<Plan>();
 
         // --- end code provided ---
+
+        public void Add(Plan plan)
+        {
+            allPlans.Add(plan);
+        }
 
         readonly Dictionary<string, List<string>> MapPlanFeature = new Dictionary<string, List<string>>();
 
