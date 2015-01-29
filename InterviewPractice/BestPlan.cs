@@ -120,6 +120,8 @@ namespace InterviewPractice
                         selectedPlans.Add(plan);
                     }
                 }
+
+                // should cache best result cost
                 var cost = selectedPlans.Sum(p => p.Cost);
                 if (cost < bestResult.Sum(p => p.Cost))
                 {
