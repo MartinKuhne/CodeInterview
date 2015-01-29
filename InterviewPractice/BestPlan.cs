@@ -160,7 +160,15 @@ namespace InterviewPractice
         /// <param name="plans"></param>
         private void RemoveSubset(IEnumerable<string> features, ICollection<Plan> plans)
         {
-            // plan did not leave idea stage
+            // this has potential to reduce the run time by quite a bit, however
+            // I thought it would not be a very frequent occurrence
+            // no telco has voice + text for $50 in one plan and voice and text for $60 in another plan
+            // Let's say we were looking for voice and text and data,
+            // and the plans were voice and text for $50 and voice, text and data for $60, and data for $5.
+            // Can we say we can take voice and text out because it's a subset? No! The voice and text for $50 is part
+            // of the least cost solution. 
+
+            throw new NotImplementedException();
         }
     }
 }
