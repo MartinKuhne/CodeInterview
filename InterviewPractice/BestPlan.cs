@@ -44,6 +44,10 @@ namespace InterviewPractice
         // -> find combinations of 1-N plans that fulfill those features 
         // -> select the cheapest combination(s) 
         /// </param>
+        /// <remarks>
+        /// The depth part of the recursion (higher values of columnIndex) will re-compute the same subset
+        /// of permutations. Dynamnic programming (caching of solutions on subset of the data) is applicable.
+        /// </remarks>
         /// <returns>
         /// IEnumerable<Plan> or null if no plan available
         /// </returns>
