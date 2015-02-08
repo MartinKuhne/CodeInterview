@@ -41,12 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AwkwardArraySort.cs" />
     <Compile Include="BestPlan.cs" />
     <Compile Include="BinarySearchTree.cs" />
     <Compile Include="Factorial.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="IsSinglyLinkedListPalindrome.cs" />
     <Compile Include="LaterallyLinkedTree.cs" />
+    <Compile Include="NaiveSubstring.cs" />
     <Compile Include="Palindrome.cs" />
     <Compile Include="Permutations.cs" />
     <Compile Include="Permutations2.cs" />
