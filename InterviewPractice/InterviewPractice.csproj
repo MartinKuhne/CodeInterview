@@ -52,12 +52,14 @@
     <Compile Include="Palindrome.cs" />
     <Compile Include="Permutations.cs" />
     <Compile Include="Permutations2.cs" />
+    <Compile Include="PowerSet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReverseString.cs" />
     <Compile Include="ReverseWords.cs" />
     <Compile Include="Silhouette.cs" />
     <Compile Include="TreeDepth.cs" />
+    <Compile Include="WordCount.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
