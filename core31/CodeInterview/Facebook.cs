@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeInterview
 {
@@ -41,6 +43,56 @@ namespace CodeInterview
             }
         
             return result;
+        }
+
+        /*Input Format
+
+        The first line contains  space-separated integers describing the respective heights of each consecutive lowercase English letter, ascii[a-z].
+        The second line contains a single word, consisting of lowercase English alphabetic letters.
+
+        Constraints
+
+        , where  is an English lowercase letter.
+        contains no more than  letters.
+        Output Format
+
+        Print a single integer denoting the area in  of highlighted rectangle when the given word is selected. Do not print units of measure.*/
+
+        public static int DesignerPdf(string[] input)
+        {
+            // I am finding the input format hilarious. It totally goes against the grain to combine business logic and input parsing in one function.
+            if (input == null || input.Length != 2)
+            {
+                throw new ArgumentException("bad argument count", "input");
+            }
+
+            var sizes = input[0].Split(new[] {' '}).Select(sizeString => int.Parse(sizeString)).ToArray();
+
+            var sizeMap = new Dictionary<char, int>();
+            int k = 0;
+            foreach(var iter in Enumerable.Range('a', 26)) // I had to look this up, awkward to ask in an interview, who does this really?
+            {
+                sizeMap.Add((char)iter, sizes[k++]);
+            }
+
+            var word = input[1];
+            if (string.IsNullOrWhiteSpace(word))
+            {
+                throw new ArgumentException("no content", "word");
+            }
+
+            var ar = word.ToCharArray();
+            int maxHeight = 0;
+            foreach (var character in ar)
+            {
+                maxHeight = Math.Max(maxHeight, sizeMap[character]);
+                if (maxHeight == 7)
+                {
+                    break;
+                }
+            }
+
+            return ar.Length * maxHeight;
         }
     }
 }
