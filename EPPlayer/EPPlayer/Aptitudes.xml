@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CoreRules>
+<Aptitudes>
+  <Aptitude Name="Cognition">
+    <Shorthand>COG</Shorthand>
+    <Description>Cognition (COG) is your aptitude for problem solving, logical analysis, and understanding. It also includes memory and recall.</Description>
+  </Aptitude>
+  <Aptitude Name="Coordination">
+    <Shorthand>COO</Shorthand>
+    <Description>Coordination (COO) is your skill at integrat ing the actions of different parts of your morph to produce smooth, successful movements. It includes manual dexterity, fine motor control, nimbleness, and balance.</Description>
+  </Aptitude>
+  <Aptitude Name="Intuition">
+    <Shorthand>INT</Shorthand>
+    <Description>Intuition (INT) is your skill at following your gut instincts and evaluating on the fly. It includes physical awareness, cleverness, and cunning.</Description>
+  </Aptitude>
+  <Aptitude Name="Reflexes">
+    <Shorthand>REF</Shorthand>
+    <Description>Reflexes (REF) is your skill at acting quickly. This encompasses your reaction time, your gut-level response, and your ability to think fast.</Description>
+  </Aptitude>
+  <Aptitude Name="Savvy">
+    <Shorthand>SAV</Shorthand>
+    <Description>Savvy (SAV) is your mental adaptability, social in tuition, and proficiency for interacting with others. It includes social awareness and manipulation.</Description>
+  </Aptitude>
+  <Aptitude Name="Somatics">
+    <Shorthand>SOM</Shorthand>
+    <Description>Somatics (SOM) is your skill at pushing your morph to the best of its physical ability, including the fundamental utilization of the morph’s strength, endurance, and sustained positioning and motion.</Description>
+  </Aptitude>
+  <Aptitude Name="Willpower">
+    <Shorthand>WIL</Shorthand>
+    <Description>Willpower (WIL) is your skill for self-control, your ability to command your own destiny.</Description>
+  </Aptitude>
+</Aptitudes>
+<Stats>
+  <Stat Name="Initiative">
+    <Shorthand>INI</Shorthand>
+    <Description>Your character’s Initiative stat helps determine when they act in relation to other characters during the Action Turn (see Initiative, p. 188). Your Initiative stat is equal to your character’s Intuition + Reflexes aptitudes (see Aptitudes, p. 123) multiplied by 2. Certain implants and other factors may modify this score.</Description>
+  </Stat>
+  <Stat Name="Lucidity">
+    <Shorthand>LUC</Shorthand>
+    <Description>Lucidity is similar to Durability, except that it measures mental health and state of mind rather than physical well-being. Your Lucidity determines how much stress (mental damage) you can take before you are incapacitated or driven insane (see Mental Health, p. 209).</Description>
+  </Stat>
+  <Stat Name="Trauma Threshold">
+    <Shorthand>TT</Shorthand>
+    <Description>The Trauma Threshold determines if you suffer a trauma (mental wound) each time you take stress (see Mental Health, p. 209). A higher Trauma Threshold means that your mental state is more resilient against experiences that might inflict psychiatric disorders or other serious mental instabilities.</Description>
+  </Stat>
+  <Stat Name="Insanity Rating">
+    <Shorthand>IR</Shorthand>
+    <Description>Your Insanity Rating is the total amount of stress your mind can take before you go permanently insane and are lost for good. Insanity Rating equals LUC x 2.</Description>
+  </Stat>
+  <Stat Name="Moxie">
+    <Shorthand>MOX</Shorthand>
+    <Description>Moxie represents your character’s inherent talent at facing down challenges and overcoming obstacles with spirited fervor. More than just luck, Moxie is your character’s ability to run the edge and do what it takes, no matter the odds. Some people consider it the evolutionary trait that spurred humankind to pick up tools, expand our brains, and face the future head on, leaving other mammals in the dust. When the sky is falling, death is imminent, and no one can help you, Moxie is what saves the day.</Description>
+  </Stat>
+  <Stat Name="Speed">
+    <Shorthand>SPD</Shorthand>
+    <Description>The Speed stat determines how often your character gets to act in an Action Turn (see Initiative, p. 188). All characters start with a Speed stat of 1, meaning they act once per turn. Certain implants and other advantages may boost this up to a maximum of 4.</Description>
+  </Stat>
+  <Stat Name="Durability">
+    <Shorthand>DUR</Shorthand>
+    <Description>Durability is your morph’s physical health (or structural integrity in the case of synthetic shells, or system integrity in the case of infomorphs). It determines the amount of damage your morph can take before you are incapacitated or killed (see Physical Health, p. 206). Durability is unlimited, though the range for baseline (unmodified) humans tends to fall between 20 and 60. Your Durability stat is determined by your morph.
+    </Description>
+  </Stat>
+  <Stat Name="Wound Threshold">
+    <Shorthand></Shorthand>
+    <Description>A Wound Threshold is used to determine if you receive a wound each time you take physical damage (see Physical Health, p. 206). The higher the Wound Threshold, the more resistant to serious injury you are.</Description>
+  </Stat>
+  <Stat Name="Death Rating">
+    <Shorthand>DR</Shorthand>
+    <Description>Death Rating is the total amount of damage your morph can take before it is killed or destroyed beyond repair. Death Rating is equal to DUR x 1.5 for biomorphs and DUR x 2 for synthmorphs.</Description>
+  </Stat>
+  <Stat Name="Damage Bonus">
+    <Shorthand></Shorthand>
+    <Description>The Damage Bonus stat quantifies how much extra oomph your character is able to give their melee and thrown weapons attacks. Damage Bonus is determined by dividing your Somatics aptitude (see below) by 10 and rounding down.</Description>
+  </Stat>
+  <Stat Name="Credits">
+    <Shorthand>CRED</Shorthand>
+    <Description></Description>
+  </Stat>
+  <Stat Name="CP">
+    <Shorthand></Shorthand>
+    <Description></Description>
+  </Stat>
+  <Stat Name="Armor (Energy)">
+    <Shorthand></Shorthand>
+    <Description></Description>
+  </Stat>
+  <Stat Name="Armor (Kinetic)">
+    <Shorthand></Shorthand>
+    <Description></Description>
+  </Stat>
+</Stats>
+  <Reputations>
+    <Rep Name="@-rep">
+      <Description>The @-list: the Circle-A list for anarchists, Barsoomians, Extropians, scum, and Titanians, noted as @-rep.</Description>
+    </Rep>
+    <Rep Name="c-rep">
+      <Description>CivicNet: used by the Jovian Republic, Lunar-Lagrange Alliance, Morningstar Constellation, Planetary Consortium, and many hypercorps, referred to as c-rep.</Description>
+    </Rep>
+    <Rep Name="e-rep">
+      <Description>EcoWave: used by nano-ecologists, preservationists, and reclaimers, referred to as e-rep.</Description>
+    </Rep>
+    <Rep Name="f-rep">
+      <Description>Fame: the seen-and-be-seen network used by socialites, artists, glitterati, and media, referred to as f-rep.</Description>
+    </Rep>
+    <Rep Name="g-rep">
+      <Description>Guanxi: used by the triads and numerous criminal entities, referred to as g-rep.</Description>
+    </Rep>
+    <Rep Name="i-rep">
+      <Description>The Eye: used by Firewall, noted as i-rep.</Description>
+    </Rep>
+    <Rep Name="r-rep">
+      <Description>
+        RNA: Research Network Affiliation, used by argonauts, technologists, scientists, and researchers, referred to as r-rep.</Description>
+    </Rep>
+  </Reputations>
+  <Weapons>
+    <Weapon Type="Melee" Skill="Blades" AP="-3" Damage="2d10 + 3" SomBonus="true">Diamond Ax</Weapon>
+    <Weapon Type="Melee" Skill="Blades" AP="-1" Damage="1d10 + 3" SomBonus="true">Flex Cutter</Weapon>
+    <Weapon Type="Melee" Skill="Blades" AP="-1" Damage="1d10 + 2" SomBonus="true">Knife</Weapon>
+    <Weapon Type="Melee" Skill="Blades" AP="-4" Damage="2d10 + 2" SomBonus="true">Monofilament Sword</Weapon>
+    <Weapon Type="Melee" Skill="Blades" AP="-2" Damage="2d10"     SomBonus="true">Vibroblade</Weapon>
+    <Weapon Type="Melee" Skill="Blades" AP="-1" Damage="2d10 + 3" SomBonus="true">Wasp Knife</Weapon>
+    <Weapon Type="Melee" Skill="Clubs"  AP="0"  Damage="1d10 + 2" SomBonus="true">Club</Weapon>
+    <Weapon Type="Melee" Skill="Clubs"  AP="0"  Damage="1d10 + 2" SomBonus="true">Extendable Baton</Weapon>
+    <Weapon Type="Melee" Skill="Clubs"  AP="0"  Damage="2d10 + 3" SomBonus="true" Bonus="Shock">Shock Baton</Weapon>
+    <Weapon Type="Melee" Skill="Exotic Melee" AP="-8" Damage="3d10"    SomBonus="false" >Monowire Garrote</Weapon>
+    <Weapon Type="Melee" Skill="Unarmed" AP="-1" Damage="1d10 + 1" SomBonus="true" >Bioware Claws</Weapon>
+    <Weapon Type="Melee" Skill="Unarmed" AP="-2" Damage="1d10 + 3" SomBonus="true" >Cyberclaws</Weapon>
+    <Weapon Type="Melee" Skill="Unarmed" AP="0"  Damage="1d10 + 1" SomBonus="true" >Bioware Claws</Weapon>
+    <Weapon Type="Melee" Skill="Unarmed" AP="-1" Damage="1d10 + 3" SomBonus="true" >Densiplast Gloves</Weapon>
+    <Weapon Type="Melee" Skill="Unarmed" AP="0" Damage="0"         SomBonus="true" Bonus="Shock">Eelware</Weapon>
+    <Weapon Type="Melee" Skill="Unarmed" AP="-1" Damage="1d10 + 1" SomBonus="true" >Unarmed</Weapon>
+  </Weapons>
+</CoreRules>
