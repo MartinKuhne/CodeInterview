@@ -2,9 +2,13 @@
 
 This is my code interview portfolio. The purpose of this repository is to provide a variety of coding examples, some complete applications, some code interview style short exercises. The goal is to provide solutions to commonly asked questions and showcase my skills and experience. All of the code presented was written by myself in its entirety (unless noted otherwise).
 
+## Software engineering stack exchange contributions
+
+Please find my software archtiecture contributions on my [Stack Exchange profile](https://softwareengineering.stackexchange.com/users/353068/martin-k)
+
 ## core31 and net45
 
-Code interview snippets, on .NET Core 3.1 and .NET framework 4.5 respectively
+Code interview snippets, on .NET Core 3.1 and .NET Framework 4.5 respectively
 
 ## Mars Rovers
 
