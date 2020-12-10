@@ -1,18 +1,18 @@
 # Code interview portfolio
 
-This is my code interview portfolio. The purpose of this repository is to provide a variety of coding examples, some complete applications, some code interview style short exercises. The goal is to provide solutions to commonly asked questions and showcase my skills and experience. All of the code presented was written by myself in its entirety (unless noted otherwise).
+This is my code interview portfolio. The purpose of this repository is to showcase my skills and experience by providing some complete projects, as well as answers to common whiteboard coding questions. All of the code presented was written by myself (except some open source code reuse in EPPlayer, credited there).
 
 ## Software engineering stack exchange contributions
 
 Please find my software archtiecture contributions on my [Stack Exchange profile](https://softwareengineering.stackexchange.com/users/353068/martin-k)
 
+## Mars Rovers
+
+The Rover project is one potential answer to the apparently popular [Mars Rovers](http://www.techinterviewpuzzles.com/2010/09/mars-rovers-thoughtworks-puzzles.html) homework interview question. Please see the readme in that folder for more information.
+
 ## core31 and net45
 
 Code interview snippets, on .NET Core 3.1 and .NET Framework 4.5 respectively
-
-## Mars Rovers
-
-rovers/* is one potential answer to the apparently popular [Mars Rovers](http://www.techinterviewpuzzles.com/2010/09/mars-rovers-thoughtworks-puzzles.html) homework interview question.
 
 ## EPPlayer
 
