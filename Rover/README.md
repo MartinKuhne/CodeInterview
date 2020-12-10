@@ -3,18 +3,18 @@
 Mars Rovers was presented to me as an interview challenge. I think it's an interesting vehicle to demonstrate skills and experience,
 albeit asking quite a few trade-offs of the candidate keeping available time in mind.
 
-The question text isn't mine to share. I found the question repeated at [Tech interview puzzles](http://www.techinterviewpuzzles.com/2010/09/mars-rovers-thoughtworks-puzzles.html). The short version is to procure a framework to move one or more objects in a two-dimensional bounded space using a series of turn left or right, or move forward one coordinate unit.
+The question text isn't mine to share. I found the question repeated at [Tech interview puzzles](http://www.techinterviewpuzzles.com/2010/09/mars-rovers-thoughtworks-puzzles.html). The short version is to procure a framework to move one or more objects in a two-dimensional bounded space using a series of commands. These commands are turn left or right, or move forward one coordinate unit.
 
 > This is a C#/.Net 5.0 project. It requires the free .NET 5.0 SDK to run. My editor is Visual Studio Code.
 
 ## Project layout
 
-Folder                Description                                  Run command 
---------------------  -------------------------------------------  ----------- 
-RoverLib              Business logic                               n/a
-Rover                 Commandline program to demonstrate the code  dotnet run
-RoverTest             Unit tests                                   dotnet test
-RoverIntegrationTest  Integration tests                            dotnet test
+Folder                | Description                                  | Run command 
+--------------------  | -------------------------------------------  | ----------- 
+RoverLib              | Business logic                               | n/a
+Rover                 | Commandline program to demonstrate the code  | dotnet run
+RoverTest             | Unit tests                                   | dotnet test
+RoverIntegrationTest  | Integration tests                            | dotnet test
 
 ## Design
 
