@@ -33,20 +33,19 @@ namespace RoverIntegrationTest
             rovers.Add(rover);
         }
 
-        [When(@"I issue the command sequence '(.*)'")]
-        public void ExecuteCommand(string command)
+        [When(@"I issue the command sequence '(.*)' to Rover '(.*)'")]
+        public void ExecuteCommand(string command, string unit)
         {
             var rovers = _scenarioContext.Get<List<MarsRover>>(KeyMarsRover);
-            // Constraint: Can only issue commands to first rover
-            var rover = rovers.First();
+            var rover = rovers[int.Parse(unit)];
             rover.Move(command);
         }
 
-        [Then(@"the new position is '(.*)'")]
-        public void TestPosition(string destination)
+        [Then(@"the new position is '(.*)' for Rover '(.*)'")]
+        public void TestPosition(string destination, string unit)
         {
             var rovers = _scenarioContext.Get<List<MarsRover>>(KeyMarsRover);
-            var rover = rovers.First();
+            var rover = rovers[int.Parse(unit)];
 
             var parsedPosition = CommandParser.ParsePosition(destination);
             rover.Position.Should().BeEquivalentTo(parsedPosition);

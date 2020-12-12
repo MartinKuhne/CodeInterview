@@ -52,10 +52,12 @@ namespace Rover.Lib
             foreach (var commandChar in command.ToCharArray())
             {
                 var step = CommandParser.ParseCommand(commandChar);
-                if (!Move(step))
+                var success = Move(step);
+
+                // Please see the README in the root folder for why we behave this way
+                if (!success)
                 {
-                    // if any individual move fails, abort movement
-                    break;
+                    return;
                 }
             }
         }

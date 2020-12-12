@@ -16,25 +16,25 @@ Rover                 | Commandline program to demonstrate the code  | dotnet ru
 RoverTest             | Unit tests                                   | dotnet test
 RoverIntegrationTest  | Integration tests                            | dotnet test
 
-## Design
+## Architecture decision log
 
-Some of the *interesting* design decisions were
+An architecture decision log documents decisions made during development and more importantly, whys of the decisions and other options considered. This can be very helpful down the road, when these decisions need to be understood and sometimes changed.
 
 * Who moves the unit(s)
 * Correct behaviour for a collision or going out of bounds
-* Naturally, how fancy to make the code vs. time constraints
 
 Two models were considered to decide who should move the units
 
 1. A supervisor mode, where a central controller issues or proxies the move commands
 2. A collaborative mode, where units move on their own and use a controller service to update their location
 
-The second approach was chosen, to account for the possible nature of a Mars expedition, favoring greater unit independence over tighter control.
+The second approach was chosen, to account for the possible nature of a Mars expedition, favoring greater unit independence over tighter control. In this model, the CanMoveTo() and ReportLocation() functions are part of the navigation interface, which is injected for the MarsRover class (see INavigation.cs).
 
-In this model, the CanMoveTo() and ReportLocation() functions are part of the navigation interface, which is injected for the MarsRover class (see INavigation.cs)
+This implementation stops moving the rover when it encounters a collision or runs out of bounds. This runs counter to the expectation in test case two, which seems to expect us to ignore just the failed command and continue. The reason for deviating from the test case is as follows: In a series of moves, the output of the previous step (the updated coordinates) becomes the input of the following step. If we modify the input, the rover will follow a different path and end up in a different location. It is simply unknown if issuer of the command intended that or not. If we cannot execute the command as indicated, we should not execute it. Or, to put it bluntly, do you want to explain to congress why their $400m rover veered off course and fell down a cliff?
 
-Given the commands to the units are issued in turns and moves, not relative or absolute coordinates, any failed move step would require the unit to stop since following the rest of the move plan
-would direct the unit to a different destination. Retries or path corrections were not required as per spec (but would be fun to implement!)
+In fact, a more correct solution is to remain at the starting point if the command cannot be executed fully.
+
+> No doubt the question was designed to be ambiguous and test the candidate's dealing with the same. In the real world, a scrum team would not allow such a story to enter the development stage, and seek clarification from the product owner.
 
 ## Recommended reading order
 
@@ -62,11 +62,13 @@ R: 2 1 S
 M: 2 0 S
 ~~~
 
-However, the first rover ended at 2 1, so the second rover would pass through the same square. In my opinion, the second rover would stop at 1 1.
+However, the first rover ended at 2 1, so the second rover would pass through the same square.
 
-## Notes
+## Future improvements
 
-* Concurrency was not requested, but I left it in as it was implemented already
-* There is always more to do, dependency injection, making the code more testable by removing direct calls to Console.* etc.
+- [ ] Do not leave the starting point if the rover would collide or run out of bounds
+- [ ] Refactor the command line interface to not be tightly coupled to Console.WriteLine (code as is is not testable)
+- [ ] Remove the concurrency and reservation system as it was not required by the spec
+- [ ] Reject initial input if the rovers start out of bounds
 
 > Disclaimer: I created this code entirely on my own
