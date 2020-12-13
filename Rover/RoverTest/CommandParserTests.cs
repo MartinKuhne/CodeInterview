@@ -10,7 +10,7 @@ namespace Rover.Test
     /// As this is a showcase, test coverage is not 100%.
     /// </summary>
     [TestFixture]
-    public class CommandParserTests
+    public class SimulationRequestValidatorTests
     {
         [Test]
         [TestCase(null, typeof(ArgumentException))]
@@ -19,14 +19,14 @@ namespace Rover.Test
         [TestCase("1 2 3 4" , typeof(ArgumentException))]
         [TestCase("-1 -1 N" , typeof(ArgumentException))]
         [TestCase("0 0 A" , typeof(ArgumentException))]
-        public void CommandParser_WhenInputIsInvalid_ThrowsException(string input, Type expectedException)
+        public void SimulationRequestValidator_WhenInputIsInvalid_ThrowsException(string input, Type expectedException)
         {
             // Arrange
             Type actualResult = null;
             
             // Act
             try {
-                CommandParser.ParsePosition(input);
+                SimulationRequestValidator.ValidatePosition(input);
             }
             catch (Exception exception)
             {
@@ -35,27 +35,6 @@ namespace Rover.Test
 
             // Assert
             Assert.AreEqual(expectedException, actualResult);
-        }
-
-        [Test]
-        [TestCase("0 0 N" , CardinalDirection.N)]
-        [TestCase("0 0 E" , CardinalDirection.E)]
-        [TestCase("0 0 S" , CardinalDirection.S)]
-        [TestCase("0 0 W" , CardinalDirection.W)]
-        public void CommandParser_WhenInputIsValid_ReturnsPosition(string input, CardinalDirection direction)
-        {
-            // Arrange
-            var expected = new Position {
-                Direction = direction,
-                Point = new Point(0, 0)
-            };
-
-            // Act
-            var actual = CommandParser.ParsePosition(input);
-
-            // Assert
-            // Use fluent assertions for property-wise object comparison
-            expected.Should().BeEquivalentTo(actual);
         }
     }
 }

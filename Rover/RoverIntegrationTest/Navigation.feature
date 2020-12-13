@@ -43,4 +43,5 @@ Scenario: Test Input 2b
     When I issue the command sequence 'LMMLM' to Rover '0'
     And I issue the command sequence 'LMLMRM' to Rover '1'
     Then the new position is '2 1 N' for Rover '0'
-    And the new position is '1 1 E' for Rover '1' # other rover is blocking '2 1' 
+ # other rover is blocking '2 1' 
+    And the new position is '1 1 E' for Rover '1'

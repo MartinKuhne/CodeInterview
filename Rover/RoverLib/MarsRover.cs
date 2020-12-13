@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Rover.Lib
 {
@@ -49,9 +50,17 @@ namespace Rover.Lib
                 return;
             }
 
-            foreach (var commandChar in command.ToCharArray())
+            Move(command.AsRoverCommand());
+        }
+
+        /// <summary>
+        /// Execute a series of moves
+        /// </summary>
+        /// <param name="commandSequence">List<RoverCommand></param>
+        public void Move(List<RoverCommand> commandSequence)
+        {
+            foreach (var step in commandSequence)
             {
-                var step = CommandParser.ParseCommand(commandChar);
                 var success = Move(step);
 
                 // Please see the README in the root folder for why we behave this way

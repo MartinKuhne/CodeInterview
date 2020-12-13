@@ -3,32 +3,22 @@ using System.Collections.Generic;
 
 namespace Rover.Lib
 {
-    public static class CommandParser
+    public static class SimulationRequestValidator
     {
-        /// <summary>
-        /// Translates character into RoverCommand
-        /// </summary>
-        private static readonly Dictionary<char, RoverCommand> RoverCommandMap = new Dictionary<char, RoverCommand>
-        {
-            { 'M', RoverCommand.Move },
-            { 'L', RoverCommand.Left },
-            { 'R', RoverCommand.Right }
-        };
-
         /// <summary>
         /// Returns a position from the given input
         /// </summary>
         /// <param name="command">input string</param>
         /// <returns>Position</returns>
         /// <exception>ArgumentException, FormatException</exception>
-        public static Position ParsePosition(string command)
+        public static void ValidatePosition(string position)
         {
-            if (string.IsNullOrWhiteSpace(command))
+            if (string.IsNullOrWhiteSpace(position))
             {
                 throw new ArgumentException("input empty");
             }
 
-            var tokens = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var tokens = position.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (tokens.Length != 3)
             {
@@ -45,18 +35,6 @@ namespace Rover.Lib
             {
                 throw new ArgumentException("coordinates may not be negative");
             }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Translate a stringified command into a RoverCommand
-        /// </summary>
-        /// <param name="command">Stringified command</param>
-        /// <returns>RoverCommand</returns>
-        public static RoverCommand ParseCommand(char command)
-        {
-            return RoverCommandMap[command];
         }
     }
 }

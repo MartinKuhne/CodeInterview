@@ -28,7 +28,7 @@ namespace RoverIntegrationTest
         public void AddRover(string position)
         {
             var rovers = _scenarioContext.Get<List<MarsRover>>(KeyMarsRover);
-            var parsedPosition = CommandParser.ParsePosition(position);
+            var parsedPosition = new Position(position);
             var rover = new MarsRover(_world, parsedPosition);
             rovers.Add(rover);
         }
@@ -47,7 +47,7 @@ namespace RoverIntegrationTest
             var rovers = _scenarioContext.Get<List<MarsRover>>(KeyMarsRover);
             var rover = rovers[int.Parse(unit)];
 
-            var parsedPosition = CommandParser.ParsePosition(destination);
+            var parsedPosition = new Position(destination);
             rover.Position.Should().BeEquivalentTo(parsedPosition);
         }
 
