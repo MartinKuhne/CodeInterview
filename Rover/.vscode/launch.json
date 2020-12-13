@@ -9,10 +9,10 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Rover/bin/Debug/net50/Rover.dll",
+            "program": "${workspaceFolder}/Rover/bin/Debug/net5.0/Rover.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
+            "console": "externalTerminal",
             "stopAtEntry": false
         },
         {
@@ -20,10 +20,10 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/RoverIntegrationTest/bin/Debug/net50/RoverIntegrationTest.dll",
+            "program": "${workspaceFolder}/RoverIntegrationTest/bin/Debug/net5.0/RoverIntegrationTest.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {
